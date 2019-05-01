@@ -45,9 +45,9 @@ const addressBook = new AddressBook();
 let userChoice = "";
 
 //main loop of the program
-while (userChoice.toLowerCase() !== "quit") {
+while (userChoice.trim().toLowerCase() !== "quit") {
   userChoice = prompt("Add, Remove, Print, or Quit?");
-  switch (userChoice.toLowerCase()) {
+  switch (userChoice.trim().toLowerCase()) {
     case "add":
       let info = [];
       info.push(prompt("Name?"));
