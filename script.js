@@ -32,8 +32,21 @@ class AddressBook {
       console.log("Invalid index.");
     }
   }
+  //delete the contact with the given name
+  deleteByName(name) {
+    for (let index in this.contacts) {
+      if (this.contacts[index].name.toLowerCase() === name.trim().toLowerCase()) {
+        this.contacts.splice(index, 1);
+        break;
+      }
+    }
+  }
   //print all the contacts
   print() {
+    if (this.contacts.length < 1) {
+      console.log("No contacts.");
+      return;
+    }
     for (let index in this.contacts) {
       console.log(`${index}. ${this.contacts[index].print()}`);
     }
@@ -46,7 +59,10 @@ let userChoice = "";
 
 //main loop of the program
 while (userChoice.trim().toLowerCase() !== "quit") {
-  userChoice = prompt("Add, Remove, Print, or Quit?");
+  userChoice = prompt("Add, Remove (by index), Delete (by name), Print, or Quit?");
+  if (!userChoice) { //if null or undefined, make it an empty string to avoid error
+    userChoice = "";
+  }
   switch (userChoice.trim().toLowerCase()) {
     case "add":
       let info = [];
@@ -58,6 +74,9 @@ while (userChoice.trim().toLowerCase() !== "quit") {
       break;
     case "remove":
       addressBook.deleteAt(prompt("Index to delete?"));
+      break;
+    case "delete":
+      addressBook.deleteByName(prompt("Name to delete?"));
       break;
     case "print":
       addressBook.print();
